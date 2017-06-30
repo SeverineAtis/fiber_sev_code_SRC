@@ -59,7 +59,7 @@ l_Cauchy_Green = false;   % Compute CG tensor if true otherwise only advect part
 
 % Result file
 % -----------
-result_file = 'PIV_fiber_St0pt2_eps8_longrun';
+result_file = 'PIV_fiber_St0pt2_eps8_longrun_meanfield';
 
 % Time info
 % ---------
@@ -73,7 +73,7 @@ DT = 1.e-2;          % RK4 time step
 % ------------------
 % Domain
 %PivField = loadvec([PIV_parameters.source,'B',num2str(PIV_parameters.t_field,'%05d'),'.vc7']);
-PivField_all =  averf(loadvec([PIV_parameters.source,'*.vc7'])); % mean PIV field over the entire acquisition!
+PivField =  averf(loadvec([PIV_parameters.source,'*.vc7'])); % mean PIV field over the entire acquisition!
 
 xc = PivField.x /100;
 yc = PivField.y /100;

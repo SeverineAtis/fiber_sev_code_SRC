@@ -5,7 +5,7 @@ t_field = param.t_field; % PIV field picture number
 source = param.source;
 L = param.L; % characteristic length scale L
 
-PivField = loadvec([source,'B',num2str(t_field,'%05d'),'.vc7']);
+PivField = averf(loadvec([source,'*.vc7'])); % mean PIV field over the entire acquisition!
 Ux_array = PivField.vx *1000/L; % converting v(m/s) to (mm/s) and normalizing by L(mm)
 Uy_array = PivField.vy *1000/L;
 
