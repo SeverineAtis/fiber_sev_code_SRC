@@ -98,7 +98,7 @@ cluster_size = 1.e-5  ;   % Size of the cluster for computing flow map gradient
 PIV_parameters.x_range = [x_min x_max];         % add description here
 PIV_parameters.y_range = [y_min y_max];         % add description here
 PIV_parameters.dx      = (x_max-x_min)/L_xc;           % add description here
-PIV_parameters.dy      = (y_max-y_min)/L_yc;           % add description here
+PIV_parameters.dy      = (_max-x_min)/L_yc;           % add description here
 PIV_parameters.dcl     = max([PIV_parameters.dx, PIV_parameters.dy])      ;           % add description here
 
 
