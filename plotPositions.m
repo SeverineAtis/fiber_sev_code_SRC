@@ -13,9 +13,9 @@ Ysph = Y;
 t = size(Xsph,3); 
 
 
-figure; hold all;
-for t = 1 : 20 : size(Xsph,3)
-plot(Xsph(1:1:Ltrac,1:1:Ctrac,t),Ysph(1:1:Ltrac,1:1:Ctrac,t), 'or', 'MarkerSize', 1.5);%, 'MarkerFaceColor', 'k');
+%figure; hold all;
+for t = t;%1 : 20 : size(Xsph,3)
+plot(Xsph(1:1:Ltrac,1:1:Ctrac,t),Ysph(1:1:Ltrac,1:1:Ctrac,t), 'om', 'MarkerSize', 1.5);%, 'MarkerFaceColor', 'k');
 set(gca,'DataAspectRatio',[1 1 1])  
 %axis ([0 1 0 1]);  
 end
@@ -61,17 +61,17 @@ t = size(X,3);
 Xelli = X;
 Yelli = Y;
 %[Lelli Celli] = size(X(:,:,t));
-Lelli = 99;
-Celli = 99;
+% Lelli = 99;
+% Celli = 99;
 
 a = 0.0013;
 b = 0.009;
 
 figure; hold on;
-fill_ellipses(Xelli(1:1:Lelli,1:1:Celli,t),Yelli(1:1:Lelli,1:1:Celli,t),a ,b , Theta(1:1:Lelli,1:1:Celli,t), 5, 'r');
+fill_ellipses(Xelli(:,:,1:50:t),Yelli(:,:,1:50:t),a ,b , Theta(:,:,1:50:t), 5, 'r');
 set(gca,'DataAspectRatio',[1 1 1]);
 %set(gca,'Color',[0 0 0]);
-axis ([0 1 0 1]);   
+%axis ([0 1 0 1]);   
 
 %%
 

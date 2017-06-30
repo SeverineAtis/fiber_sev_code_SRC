@@ -5,7 +5,7 @@ clear all
 %                                       USER INIT
 % ======================================================================================
 
-init_file = 'user_init_PIV_tracer';
+init_file = 'user_init_PIV_fiber';
 run(init_file);
 
 % ======================================================================================
@@ -47,6 +47,21 @@ if strcmp(flow_field, 'rotor_oscillator')
                                        l_grad, RO_generator_parallel, RO_generator_n_proc );
    end
 end
+
+
+% Create piv field interpolant, and also gradients interpolant if needed
+% ==========================================
+if strcmp(flow_field, 'piv')
+   l_grad = strcmp(particle_type, 'fiber');
+   if( l_grad )
+      [ Ux0, Uy0, dUx0_dx, dUx0_dy, dUy0_dx, dUy0_dy ] = ...
+          piv_grad( PIV_parameters, file, l_load_piv_grad, l_save);
+   else
+      [ Ux0, Uy0 ] = ...
+          piv_grad( PIV_parameters, file, l_load_piv_grad, l_save);
+   end
+end
+
 
 % Initial conditions
 % ==================
@@ -96,7 +111,7 @@ if( strcmp(particle_type, 'fiber') )
         case 'rotor_oscillator'
           [X_dot_0, Y_dot_0]  = rotor_oscillator_flow(t_init, [X_0, Y_0], delta, Ux0, Uy0, RO_parameters);
         case 'piv'
-          [X_dot_0, Y_dot_0]  = piv_field(t_init, [X_0, Y_0]);
+          [X_dot_0, Y_dot_0]  = piv_flow(t_init, [X_0, Y_0], delta, Ux0, Uy0, PIV_parameters);
       end
       X_dot_0 = init_coeff * X_dot_0;
       Y_dot_0 = init_coeff * Y_dot_0;
@@ -132,6 +147,8 @@ elseif( strcmp(particle_type, 'sphere') )
           [X_dot_0, Y_dot_0] = double_gyre_flow(t_init, [X_0 , Y_0], delta, DG_parameters);
         case 'rotor_oscillator'
           [X_dot_0, Y_dot_0] = rotor_oscillator_flow(t_init, [X_0, Y_0], delta, Ux0, Uy0, RO_parameters);
+        case 'piv'
+          [X_dot_0, Y_dot_0] = piv_flow(t_init, [X_0, Y_0], delta, Ux0, Uy0, PIV_parameters);
       end
       X_dot_0 = init_coeff * X_dot_0;
       Y_dot_0 = init_coeff * Y_dot_0;
@@ -156,16 +173,18 @@ tic_id = tic;
 % --------------------------------------
 switch flow_field
     
-     case 'piv'
+   case 'piv'
     switch particle_type
       case 'passive'
-        flow_field_handle = @(t, XY) piv_field( t, XY, delta, PIV_parameters );
+        flow_field_handle = @(t, XY) piv_flow( t, XY, delta, Ux0, Uy0, PIV_parameters );
         RHS = @(t, State) RHS_passive( t, State, flow_field_handle );
-%       case 'fiber'
-%         flow_field_handle = @(t, XY) double_gyre_flow_and_grad( t, XY, delta, DG_parameters );
-%         RHS = @(t, State) RHS_fiber( t, State, flow_field_handle, fiber_parameters );
+      case 'fiber'
+        flow_field_handle = @(t, XY) piv_flow_and_grad(t, XY, delta, Ux0, Uy0, ...
+                                                          dUx0_dx, dUx0_dy, dUy0_dx, dUy0_dy, ...
+                                                          PIV_parameters);
+        RHS = @(t, State) RHS_fiber( t, State, flow_field_handle, fiber_parameters );
       case 'sphere'
-        flow_field_handle = @(t, XY) piv_field_and_grad( t, XY, delta, PIV_parameters );
+        flow_field_handle = @(t, XY) piv_flow( t, XY, delta, Ux0, Uy0, PIV_parameters );
         RHS = @(t, State) RHS_sphere( t, State, flow_field_handle, sphere_parameters );
     end
     

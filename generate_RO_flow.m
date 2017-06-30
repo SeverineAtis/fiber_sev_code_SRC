@@ -1,4 +1,4 @@
-function [Ux0 Uy0 varargout] = generate_RO_flow(param, file, l_load, l_save, l_grad, l_parallel, n_proc)
+function [Ux0, Uy0, varargout] = generate_RO_flow(param, file, l_load, l_save, l_grad, l_parallel, n_proc)
  
    if( l_load )
       
