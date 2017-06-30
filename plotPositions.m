@@ -13,9 +13,9 @@ Ysph = Y;
 t = size(Xsph,3); 
 
 
-%figure; hold all;
-for t = t;%1 : 20 : size(Xsph,3)
-plot(Xsph(1:1:Ltrac,1:1:Ctrac,t),Ysph(1:1:Ltrac,1:1:Ctrac,t), 'om', 'MarkerSize', 1.5);%, 'MarkerFaceColor', 'k');
+figure; hold all;
+for t = 20000: 1000 : 50000
+plot(Xsph(1:2:Ltrac,1:2:Ctrac,t),Ysph(1:2:Ltrac,1:2:Ctrac,t), 'ok', 'MarkerSize', 1);%, 'MarkerFaceColor', 'k');
 set(gca,'DataAspectRatio',[1 1 1])  
 %axis ([0 1 0 1]);  
 end

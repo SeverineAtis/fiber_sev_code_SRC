@@ -64,10 +64,10 @@ result_file = 'PIV_fiber_TEST';
 % Time info
 % ---------
 t_init = 0;          % Initial time
-t_fin = 500;          % Final time
+t_fin = 10000;          % Final time
 out_period = 1;     % Intermediate state output every out_period time steps
                      % Put negative value for no intermediate output => only initial and final states
-DT = 1.e-2;          % RK4 time step
+DT = 1.e-1;          % RK4 time step
 
 % Initial conditions
 % ------------------
@@ -76,19 +76,17 @@ PivField = loadvec([PIV_parameters.source,'B',num2str(PIV_parameters.t_field,'%0
 
 xc = PivField.x /100;
 yc = PivField.y /100;
-
 L_xc = length(xc);
 L_yc = length(yc);
-
 x_offset = (max(xc) - min(xc) )/2;
 y_offset = (max(yc) - min(yc) )/2;
-
 xc = xc - (max(xc) - x_offset);
 yc = yc - (max(yc) - y_offset);
 
-x_min = min(xc)  ; x_max = max(xc) ;       % x domain boundaries normalize by L 
+x_min = min(xc)  ; x_max = max(xc) ;   % x domain boundaries normalize by L 
 y_min = min(yc)  ; y_max = max(yc) ;   % y domain boundaries normalize by L 
-dx = 0.1  ; dy = 0.1 ;          % Resolution
+dx = (x_max-x_min)/L_xc;
+dy = (y_max-y_min)/L_yc;                % Resolution of the particles grid
 % Velocity
 init_at_rest = true  ;   % if false, start at local fluid velocity
 init_coeff   = 1     ;   % start at local fluid velocity x init_coeff
