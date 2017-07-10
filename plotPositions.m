@@ -1,24 +1,21 @@
-
 Xsph = X;
 Ysph = Y;
-
 [Ltrac Ctrac] = size(X(:,:,1));
-
-% Xtrac = X;
-% Ytrac = Y;
-% 
-% [Ltrac Ctrac] = size(X(:,:,1));
-
-
-t = size(Xsph,3); 
-
+t_fin = size(X,3);
 
 %figure; hold all;
-for t = 20000: 1000 : 50000
-plot(Xsph(1:2:Ltrac,1:2:Ctrac,t),Ysph(1:2:Ltrac,1:2:Ctrac,t), 'o','MarkerEdgeColor',[1 0.5 0], 'MarkerSize', 1);%, 'MarkerFaceColor', 'k');
+% 
+% for t = 1: 1000 : 10000
+% plot(Xsph(1:2:Ltrac,1:2:Ctrac,t),Ysph(1:2:Ltrac,1:2:Ctrac,t), 'o','MarkerEdgeColor',[0 0.8 0.2], 'MarkerSize', 1);%, 'MarkerFaceColor', 'k');
+% set(gca,'DataAspectRatio',[1 1 1])  
+% end
+
+for t = 2% t_fin-10000: 1000 : t_fin
+plot(Xsph(1:2:Ltrac,1:2:Ctrac,t),Ysph(1:2:Ltrac,1:2:Ctrac,t), 'o','MarkerEdgeColor',[1 0 0], 'MarkerSize', 1);%, 'MarkerFaceColor', 'k');
 set(gca,'DataAspectRatio',[1 1 1])  
-%axis ([0 1 0 1]);  
 end
+
+axis ([-1.5 1.5 -0.5 0.5]);  
 %%
 t = size(Xtrac,3); 
 

@@ -7,6 +7,8 @@ function [Ux0, Uy0, varargout] = piv_grad(param, file, l_load_piv_grad, l_save)
       
       save_obj = matfile(file, 'Writable', false);
       
+      Ux0 = save_obj.Ux0;
+      Uy0 = save_obj.Uy0;
       varargout{1} = save_obj.dUx0_dx;
       varargout{2} = save_obj.dUx0_dy;
       varargout{3} = save_obj.dUy0_dx;
@@ -69,6 +71,11 @@ function [Ux0, Uy0, varargout] = piv_grad(param, file, l_load_piv_grad, l_save)
       % Write interpolants to file if required
       % --------------------------------------
       if( l_save )
+            
+            save_obj = matfile(file, 'Writable', true);
+            
+            save_obj.Ux0 = Ux0;
+            save_obj.Uy0 = Uy0;
             save_obj.dUx0_dx = varargout{1};
             save_obj.dUx0_dy = varargout{2};
             save_obj.dUy0_dx = varargout{3};
