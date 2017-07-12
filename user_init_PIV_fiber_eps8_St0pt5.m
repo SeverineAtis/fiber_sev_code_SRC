@@ -38,8 +38,8 @@ PIV_parameters.source = 'D:\DATAS\151118_PIV_100rpm_steady__6Hz\';
 PIV_parameters.t_field = 900;               % experimental flow field time step
 PIV_parameters.L = 100;                     % characteristic length scale L in mm, here the tank height: (W X h) =(400mm X 100mm)
 file = '..\INPUT\PIV_grad_interpolant' ;    % file where piv field gradients interpolant is read or written 
-l_save = false;                              % save or not RO interpolant
-l_load_piv_grad = true;                    % load or not RO interpolant
+l_save = true;                              % save or not PIV interpolant
+l_load_piv_grad = false;                    % load or not PIV interpolant
 
 % Particle type
 % -------------
@@ -49,8 +49,8 @@ particle_type  = 'fiber';   % Choose 'fiber' or 'passive'
  sphere_parameters.st  = 0.1 ;     % particle Stokes number
 
 % Parameters for fiber particles
-fiber_parameters.eps = 8    ;     % ellipse aspect ratio: epsilon =  b/a
-fiber_parameters.St  = 0.5;     % particle Stokes number
+fiber_parameters.eps = 4    ;     % ellipse aspect ratio: epsilon =  b/a
+fiber_parameters.St  = 0.01;     % particle Stokes number
 % fiber_parameters.Re  = 1.e-3;     % Reynolds number
 
 % Cauchy Green Tensor
@@ -64,10 +64,10 @@ result_file = 'PIV_fiber_St0pt5_eps8_meanfield_DT0pt0001';
 % Time info
 % ---------
 t_init = 0;          % Initial time
-t_fin = 50;          % Final time
-out_period = -1;     % Intermediate state output every out_period time steps
+t_fin = 500;          % Final time
+out_period = 1;     % Intermediate state output every out_period time steps
                      % Put negative value for no intermediate output => only initial and final states
-DT = 1.e-4;          % RK4 time step
+DT = 1.e-3;          % RK4 time step
 
 % Initial conditions
 % ------------------
@@ -86,8 +86,8 @@ yc = yc - (max(yc) - y_offset);
 
 x_min = min(xc)  ; x_max = max(xc) ;   % x domain boundaries normalize by L 
 y_min = min(yc)  ; y_max = max(yc) ;   % y domain boundaries normalize by L 
-dx = (x_max-x_min)/L_xc;
-dy = (y_max-y_min)/L_yc;                % Resolution of the particles grid
+dx = (x_max-x_min)/L_xc*2;
+dy = (y_max-y_min)/L_yc*2;                % Resolution of the particles grid
 % Velocity
 init_at_rest = true  ;   % if false, start at local fluid velocity
 init_coeff   = 1     ;   % start at local fluid velocity x init_coeff
@@ -98,7 +98,7 @@ PIV_parameters.x_range = [x_min x_max];         % add description here
 PIV_parameters.y_range = [y_min y_max];         % add description here
 PIV_parameters.dx      = (x_max-x_min)/L_xc;           % add description here
 PIV_parameters.dy      = (y_max-y_min)/L_yc;           % add description here
-PIV_parameters.dcl     = max([PIV_parameters.dx, PIV_parameters.dy])      ;           % add description here
+PIV_parameters.dcl     = max([PIV_parameters.dx, PIV_parameters.dy])/4     ;           % add description here
 
 
 % Figure info
