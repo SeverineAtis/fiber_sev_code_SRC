@@ -20,4 +20,5 @@ showf(Vfield_mean,'ScaleArrow',2000,'Background','off');
 quiver(Xgrid, Ygrid, F.vx', F.vy');
 set(gca,'DataAspectRatio',[1 1 1]);
 %%
+figure
 showf(F,'ScaleArrow',2000,'Background','off')

@@ -59,7 +59,7 @@ l_Cauchy_Green = false;   % Compute CG tensor if true otherwise only advect part
 
 % Result file
 % -----------
-result_file = 'PIV_sphere_St0pt2_longrun_meanfield';
+result_file = 'PIV_sphere_St0pt2_longrun_meanfield_test';
 
 % Time info
 % ---------

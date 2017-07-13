@@ -5,13 +5,27 @@ t_fin = size(X,3);
 
 figure; hold all;
 
-for t = 1: 100 : 1000
-plot(Xsph(1:1:Ltrac,1:1:Ctrac,t),Ysph(1:1:Ltrac,1:1:Ctrac,t), 'o','MarkerEdgeColor',[0 0.8 0.2], 'MarkerSize', 1);%, 'MarkerFaceColor', 'k');
+for t = 1: 1000 : 10000
+plot(Xsph(1:1:Ltrac,1:1:Ctrac,t),Ysph(1:1:Ltrac,1:1:Ctrac,t), 'o','MarkerEdgeColor',[0 0.8 0], 'MarkerSize', 1);%, 'MarkerFaceColor', 'k');
 set(gca,'DataAspectRatio',[1 1 1])  
 end
 
-for t = t_fin-1000: 100 : t_fin
-plot(Xsph(1:1:Ltrac,1:1:Ctrac,t),Ysph(1:1:Ltrac,1:1:Ctrac,t), 'o','MarkerEdgeColor',[1 0 0], 'MarkerSize', 1);%, 'MarkerFaceColor', 'k');
+for t = t_fin-10000: 1000 : t_fin
+plot(Xsph(1:1:Ltrac,1:1:Ctrac,t),Ysph(1:1:Ltrac,1:1:Ctrac,t), 'o','MarkerEdgeColor',[1 0.5 0], 'MarkerSize', 1);%, 'MarkerFaceColor', 'k');
+set(gca,'DataAspectRatio',[1 1 1])  
+end
+
+axis ([-1.5 1.5 -0.5 0.5]);
+
+%%
+figure; hold all;
+Xsph = X;
+Ysph = Y;
+[Ltrac Ctrac] = size(X(:,:,1));
+t_fin = size(X,3);
+
+for t = 20000: 1000 : 50000
+plot(Xsph(1:2:Ltrac,1:2:Ctrac,t),Ysph(1:2:Ltrac,1:2:Ctrac,t), 'o','MarkerEdgeColor',[0 0 0], 'MarkerSize', 1);%, 'MarkerFaceColor', 'k');
 set(gca,'DataAspectRatio',[1 1 1])  
 end
 

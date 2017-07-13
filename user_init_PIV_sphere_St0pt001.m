@@ -34,16 +34,16 @@ RO_generator_parallel = false ;  % Run RO generator in parallel
 RO_generator_n_proc   = 16    ;  % Number of workers used in parfor if parallel is true
 
 % piv flow parameters
-PIV_parameters.source = 'D:\DATAS\151118_PIV_100rpm_steady_6Hz_12X12\';
+PIV_parameters.source = 'D:\DATAS\151118_PIV_100rpm_steady__6Hz\';
 PIV_parameters.t_field = 900;               % experimental flow field time step
 PIV_parameters.L = 100;                     % characteristic length scale L in mm, here the tank height: (W X h) =(400mm X 100mm)
 file = '..\INPUT\PIV_grad_interpolant' ;    % file where piv field gradients interpolant is read or written 
 l_save = false;                              % save or not RO interpolant
-l_load_piv_grad = false;                    % load or not RO interpolant
+l_load_piv_grad = true;                    % load or not RO interpolant
 
 % Particle type
 % -------------
-particle_type  = 'passive';   % Choose 'fiber' or 'passive'
+particle_type  = 'sphere';   % Choose 'fiber' or 'passive'
 
 % Parameters for sphere particles
  sphere_parameters.st  = 0.005 ;     % particle Stokes number
@@ -59,7 +59,7 @@ l_Cauchy_Green = false;   % Compute CG tensor if true otherwise only advect part
 
 % Result file
 % -----------
-result_file = 'PIV_tracer_12X12_PIV_T500';
+result_file = 'PIV_sphere_St0pt005_longrun_meanfield_test';
 
 % Time info
 % ---------
