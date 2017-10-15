@@ -1,5 +1,5 @@
-Xsph = X;
-Ysph = Y;
+Xsph = Y;
+Ysph = -X;
 [Ltrac Ctrac] = size(X(:,:,1));
 t_fin = size(X,3);
 

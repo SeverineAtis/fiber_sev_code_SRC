@@ -24,7 +24,7 @@ function [Ux0, Uy0, varargout] = piv_grad(param, file, l_load_piv_grad, l_save)
       
       % Define grid
       % -----------
-      x_range = param.x_range;
+      x_range = param.x_range; % inverted X and Y since working with 270 degree roated matrices!!!!!!!
       y_range = param.y_range;
       dx      = param.dx     ;
       dy      = param.dy     ;
@@ -33,7 +33,7 @@ function [Ux0, Uy0, varargout] = piv_grad(param, file, l_load_piv_grad, l_save)
       x_grid = x_range(1):dx:x_range(2);
       y_grid = y_range(1):dy:y_range(2);
 
-      [XG,YG] = ndgrid(y_grid, x_grid); % inverted X and Y since working with 270 degree roated matrices!!!!!!!
+      [XG,YG] = ndgrid(x_grid, y_grid); 
       
       sz_grid = size(XG);
       n_points = numel(XG);
@@ -50,7 +50,7 @@ function [Ux0, Uy0, varargout] = piv_grad(param, file, l_load_piv_grad, l_save)
       ux = Ux0(X,Y);
       uy = Uy0(X,Y);
       
-      [XG,YG] = ndgrid(y_grid, x_grid); % inverted X and Y since working with 270 degree roated matrices!!!!!!!
+      [XG,YG] = ndgrid(x_grid, y_grid);
       
       % dUx0_dx
       field_tmp = ( ux(1*n_points+1:2*n_points) ) - ux(3*n_points+1:4*n_points) / dcl;

@@ -72,14 +72,14 @@ DT = 1.e-2;          % RK4 time step
 % ------------------
 % Domain
 F = GetAdimPiv(PIV_parameters.source);
-xc = F.x;
+xc = F.x; % inverted X and Y since working with 270 degree rotated matrices!!!!!!!
 yc = F.y;
 L_xc = length(xc);
 L_yc = length(yc);
 x_min = min(xc)  ; x_max = max(xc) ;   % nondimensional x domain boundaries
 y_min = min(yc)  ; y_max = max(yc) ;   % nondimensional y domain boundaries
-dx = (x_max-x_min)/L_xc;
-dy = (y_max-y_min)/L_yc;                % nondimensional resolution of the flow field grid
+dx = (x_max-x_min)/L_xc *2;
+dy = (y_max-y_min)/L_yc *2;                % nondimensional resolution of the particle grid
 % Velocity
 init_at_rest = true  ;   % if false, start at local fluid velocity
 init_coeff   = 1     ;   % start at local fluid velocity x init_coeff
@@ -88,7 +88,7 @@ cluster_size = 1.e-5  ;   % Size of the cluster for computing flow map gradient
 %PIV field interpolant parameters
 PIV_parameters.x_range = [x_min x_max];         % interpolation domain
 PIV_parameters.y_range = [y_min y_max];         
-PIV_parameters.dx      = dx;    % interpolation domain resolution
+PIV_parameters.dx      = dx;    % interpolation domain resolution = PIV resolution
 PIV_parameters.dy      = dy;    
 PIV_parameters.dcl     = max([dx, dy]); %interpolant gradient determination scale
 

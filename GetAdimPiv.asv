@@ -29,18 +29,16 @@ y_offset = 0;
 x_center = (max(x_adim) - min(x_adim) )/2; % find the center of the x axis
 y_center = (max(y_adim) - min(y_adim) )/2;
 
-xc = x_adim - (max(x_adim) - x_center) - x_offset;
-yc = y_adim - (max(y_adim) - y_center) - y_offset;
+xc = x_adim - (max(x_adim) - x_center) + x_offset;
+yc = y_adim - (max(y_adim) - y_center) + y_offset;
 
+%**********************************************************************
+% inverted X and Y since working with 270 degree rotated matrices!!!!!!!
+%**********************************************************************
+adim_PivField.ux = rot90(Ux_adim,3);
+adim_PivField.uy = rot90(Uy_adim,3);
+adim_PivField.x = yc;
+adim_PivField.y = xc;
 
-adim_PivField.ux = Ux_adim;
-adim_PivField.uy = Uy_adim;
-adim_PivField.x = xc;
-adim_PivField.y = yc;
-
-
-F.ux = rot90(Ux_adim,3)
-F.x = yc
-F.y = 
 end
 

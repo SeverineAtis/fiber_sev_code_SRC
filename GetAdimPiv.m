@@ -32,11 +32,13 @@ y_center = (max(y_adim) - min(y_adim) )/2;
 xc = x_adim - (max(x_adim) - x_center) + x_offset;
 yc = y_adim - (max(y_adim) - y_center) + y_offset;
 
-
-adim_PivField.ux = rot90(Ux_adim,3);
-adim_PivField.uy = rot90(Uy_adim,3);
-adim_PivField.x = xc;
-adim_PivField.y = yc;
+%**********************************************************************
+% inverted X and Y since working with 270 degree rotated matrices!!!!!!!
+%**********************************************************************
+adim_PivField.ux = rot90(Uy_adim,3);
+adim_PivField.uy = - rot90(Ux_adim,3);
+adim_PivField.x = yc;
+adim_PivField.y = xc;
 
 end
 
