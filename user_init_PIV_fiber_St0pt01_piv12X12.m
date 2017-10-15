@@ -38,19 +38,19 @@ PIV_parameters.source = 'D:\DATAS\151118_PIV_100rpm_steady_6Hz_12X12\';
 PIV_parameters.t_field = 900;               % experimental flow field time step
 PIV_parameters.L = 100;                     % characteristic length scale L in mm, here the tank height: (W X h) =(400mm X 100mm)
 file = '..\INPUT\PIV_grad_interpolant' ;    % file where piv field gradients interpolant is read or written 
-l_save = false;                              % save or not RO interpolant
+l_save = true;                              % save or not RO interpolant
 l_load_piv_grad = false;                    % load or not RO interpolant
 
 % Particle type
 % -------------
-particle_type  = 'sphere';   % Choose 'fiber' or 'passive'
+particle_type  = 'fiber';   % Choose 'fiber' or 'passive'
 
 % Parameters for sphere particles
- sphere_parameters.st  = 0.005 ;     % particle Stokes number
+ sphere_parameters.st  = 0.1 ;     % particle Stokes number
 
 % Parameters for fiber particles
 fiber_parameters.eps = 4    ;     % ellipse aspect ratio: epsilon =  b/a
-fiber_parameters.St  = 0.2;     % particle Stokes numbers
+fiber_parameters.St  = 0.01;     % particle Stokes numbers
 fiber_parameters.Re  = 1.e-3;     % Reynolds number
 
 % Cauchy Green Tensor
@@ -59,7 +59,7 @@ l_Cauchy_Green = false;   % Compute CG tensor if true otherwise only advect part
 
 % Result file
 % -----------
-result_file = 'PIV_tracer_12X12_PIV_T500';
+result_file = 'PIV_fiber_eps4_St0pt01_12X12_PIV_T500';
 
 % Time info
 % ---------
@@ -75,8 +75,8 @@ DT = 1.e-2;          % RK4 time step
 %PivField = loadvec([PIV_parameters.source,'B',num2str(PIV_parameters.t_field,'%05d'),'.vc7']);
 PivField =  averf(loadvec([PIV_parameters.source,'*.vc7'])); % mean PIV field over the entire acquisition!
 
-xc = PivField.x /100;
-yc = PivField.y /100;
+xc = PivField.x /PIV_parameters.L;   % normalizing xc(mm) by L in mm
+yc = PivField.y /PIV_parameters.L;   % normalizing yc(mm) by L in mm
 L_xc = length(xc);
 L_yc = length(yc);
 x_offset = (max(xc) - min(xc) )/2;
@@ -86,8 +86,8 @@ yc = yc - (max(yc) - y_offset);
 
 x_min = min(xc)  ; x_max = max(xc) ;   % x domain boundaries normalize by L 
 y_min = min(yc)  ; y_max = max(yc) ;   % y domain boundaries normalize by L 
-dx = (x_max-x_min)/L_xc;
-dy = (y_max-y_min)/L_yc;                % Resolution of the particles grid
+dx = (x_max-x_min)/L_xc*2;
+dy = (y_max-y_min)/L_yc*2;                % Resolution of the particles grid
 % Velocity
 init_at_rest = true  ;   % if false, start at local fluid velocity
 init_coeff   = 1     ;   % start at local fluid velocity x init_coeff

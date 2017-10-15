@@ -34,7 +34,7 @@ function F = RHS_fiber(t, State, flow_field, param)
    SIN = sin(Theta);
    COS_2   = COS .* COS;
    SIN_2   = SIN .* SIN;
-   COS_SIN = (kxx - kyy) * COS .* SIN;
+   COS_SIN =  (kxx - kyy) * COS .* SIN;
    clear COS SIN
    
    F(:,1) = X_dot;

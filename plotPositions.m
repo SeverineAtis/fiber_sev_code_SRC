@@ -4,18 +4,17 @@ Ysph = Y;
 t_fin = size(X,3);
 
 figure; hold all;
+% for t = 1: 1000 : 10000
+% plot(Xsph(1:1:Ltrac,1:1:Ctrac,t),Ysph(1:1:Ltrac,1:1:Ctrac,t), 'o','MarkerEdgeColor',[0 0.8 0], 'MarkerSize', 1);%, 'MarkerFaceColor', 'k');
+% set(gca,'DataAspectRatio',[1 1 1])  
+% end
 
-for t = 1: 1000 : 10000
-plot(Xsph(1:1:Ltrac,1:1:Ctrac,t),Ysph(1:1:Ltrac,1:1:Ctrac,t), 'o','MarkerEdgeColor',[0 0.8 0], 'MarkerSize', 1);%, 'MarkerFaceColor', 'k');
+for t = 1:10: t_fin
+plot(Xsph(1:3:Ltrac,1:3:Ctrac,t),Ysph(1:3:Ltrac,1:3:Ctrac,t), 'o','MarkerEdgeColor',[0 0.8 0.1], 'MarkerSize', 1);%, 'MarkerFaceColor', 'k');
 set(gca,'DataAspectRatio',[1 1 1])  
 end
 
-for t = t_fin-10000: 1000 : t_fin
-plot(Xsph(1:1:Ltrac,1:1:Ctrac,t),Ysph(1:1:Ltrac,1:1:Ctrac,t), 'o','MarkerEdgeColor',[1 0.5 0], 'MarkerSize', 1);%, 'MarkerFaceColor', 'k');
-set(gca,'DataAspectRatio',[1 1 1])  
-end
-
-axis ([-1.5 1.5 -0.5 0.5]);
+%axis ([-1.5 1.5 -0.5 0.5]);
 
 %%
 figure; hold all;
@@ -69,10 +68,10 @@ end
 
 %%
 t_fin = size(X,3);
-t_start = t_fin - 1000;
-Dt_fig = 100;
+t_start = t_fin - 10000;
+Dt_fig = 1000;
 
-% t_fin = 3001;
+% t_fin = 1001;
 % t_start = t_fin - 1000;
 % Dt_fig = 100;
 
@@ -84,10 +83,11 @@ a = 0.005;
 b = 0.04;
 
 figure; hold on;
-fill_ellipses(Xelli(1:1:Lelli,1:1:Celli,t_start:Dt_fig:t_fin),Yelli(1:1:Lelli,1:1:Celli,t_start:Dt_fig:t_fin),a ,b , Theta(1:1:Lelli,1:1:Celli,t_start:Dt_fig:t_fin), 20, 'r');
+fill_ellipses(Xelli(1:1:Lelli,1:1:Celli,t_start:Dt_fig:t_fin),Yelli(1:1:Lelli,1:1:Celli,t_start:Dt_fig:t_fin),a ,b , Theta(1:1:Lelli,1:1:Celli,t_start:Dt_fig:t_fin), 20, 'b');
 set(gca,'DataAspectRatio',[1 1 1]);
 %set(gca,'Color',[0 0 0]);
 %axis ([0 1 0 1]);   
+axis ([-1.5 1.5 -0.5 0.5]);  
 
 %%
 
