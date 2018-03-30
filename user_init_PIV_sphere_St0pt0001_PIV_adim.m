@@ -38,15 +38,15 @@ PIV_parameters.source = 'D:\DATAS\151118_PIV_100rpm_steady_6Hz_12X12\';
 %PIV_parameters.t_field = 900;               % experimental flow field time step
 PIV_parameters.L = 100;                     % characteristic length scale L in mm, here the tank height: (W X h) =(400mm X 100mm)
 file = '..\INPUT\PIV_grad_interpolant_ADIM_200rpm' ;    % file where piv field gradients interpolant is read or written 
-l_save = true;                              % save or not RO interpolant
-l_load_piv_grad = false;                    % load or not RO interpolant
+l_save = false;                              % save or not RO interpolant
+l_load_piv_grad = true;                    % load or not RO interpolant
 
 % Particle type
 % -------------
-particle_type  = 'passive';   % Choose 'fiber' or 'passive'
+particle_type  = 'sphere';   % Choose 'fiber' or 'passive'
 
 % Parameters for sphere particles
- sphere_parameters.st  = 0.1 ;     % particle Stokes number
+ sphere_parameters.st  = 0.0001 ;     % particle Stokes number
 
 % Parameters for fiber particles
 fiber_parameters.eps = 5    ;     % ellipse aspect ratio: epsilon =  b/a
@@ -58,15 +58,15 @@ l_Cauchy_Green = false;   % Compute CG tensor if true otherwise only advect part
 
 % Result file
 % -----------
-result_file = 'PIV_tracer_200rpm';
+result_file = 'adimPIV_sphere_St0pt0001_T10';
 
 % Time info
 % ---------
 t_init = 0;          % Initial time
-t_fin = 100;         % Final time
+t_fin = 10;         % Final time
 out_period = 1;     % Intermediate state output every out_period time steps
                      % Put negative value for no intermediate output => only initial and final states
-DT = 1.e-2;          % RK4 time step
+DT = 1.e-4;          % RK4 time step
 
 % Initial conditions
 % ------------------
@@ -78,8 +78,8 @@ L_xc = length(xc);
 L_yc = length(yc);
 x_min = min(xc)  ; x_max = max(xc) ;   % nondimensional x domain boundaries
 y_min = min(yc)  ; y_max = max(yc) ;   % nondimensional y domain boundaries
-dx = (x_max-x_min)/L_xc *2;
-dy = (y_max-y_min)/L_yc *2;                % nondimensional resolution of the particle grid
+dx = (x_max-x_min)/L_xc *2*3;
+dy = (y_max-y_min)/L_yc *2*3;                % nondimensional resolution of the particle grid
 % Velocity
 init_at_rest = true  ;   % if false, start at local fluid velocity
 init_coeff   = 1     ;   % start at local fluid velocity x init_coeff

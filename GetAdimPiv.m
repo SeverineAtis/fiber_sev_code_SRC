@@ -11,7 +11,8 @@ PivField = averf(loadvec([source,'*.vc7'])); % mean PIV field over the entire ac
 
 %________________________
 % nondimensional velocity
-U = 0.005; % characteristic velocity of the PIV field [U]= m/s
+U = 0.005 / 2; % characteristic velocity of the PIV field [U]= m/s
+% multiplied by 2: 100rpm (PIV rotation) -> 200rpm (experiments with particles)
 Ux_adim = PivField.vx ./U;
 Uy_adim = PivField.vy ./U;
 

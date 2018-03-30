@@ -5,7 +5,7 @@ clear all
 %                                       USER INIT
 % ======================================================================================
 
-init_file = 'user_init_PIV_fiber_eps5_St0pt001_PIV_adim';
+init_file = 'user_init_PIV_fiber_St10_minus5_PIV_adim_200rpm';
 run(init_file);
 
 % ======================================================================================

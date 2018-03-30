@@ -22,3 +22,4 @@ uy_pts = Uy0(X,Y);
 ux_array = reshape(ux_pts, sz_grid);
 uy_array = reshape(uy_pts, sz_grid);
 imagesc(yc,xc,uy_array)
+
